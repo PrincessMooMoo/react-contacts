@@ -1,70 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-class ContactForm extends React.Component {
-    constructor(props) {
-        super(props);
+const ContactForm = (props) => {
 
-        this.state= {
-            firstName: '',
-            lastName: '',
-            phoneNumber: '',
-            email: '',
-            address: '',
-            profileImageSrc: ''
-        };
-    }
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+    const [profileImageSrc, setProfileImageSrc] = useState('');
 
-    handleTextInputChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-
-        this.setState({
-            [name]: value
-        });
-
-    }
-
-    handleProfileImageUpload(event) {
+    const handleImageUpload = (event) => {
         const file = event.target.files[0];
         const fileReader = new FileReader();
 
         fileReader.readAsDataURL(file);
 
         fileReader.onload = (event) => {
-            this.setState({
-                profileImageSrc: event.target.result
-            })
+            setProfileImageSrc(event.target.result)
         }
     }
-    
-    render() {
 
-        const {firstName, lastName, phoneNumber, email, address} = this.state;
-
-        return (
-            <form>
-                <label>First Name</label>
-                <input type="text" 
-                value={firstName} 
-                onChange={this.handleTextInputChange} 
-                name="firstName"/>
-                <br />
-                <input type="text" 
-                value={lastName} 
-                onChange={this.handleTextInputChange} 
-                name="lastName"/>
-                <br />
-                <input type="tel" value={phoneNumber} onChange={this.handleTextInputChange} name="phoneNumber"/>
-                <input type="email" value={email} onChange={this.handleTextInputChange}/>
-                <input type="text" value={address} onChange={this.handleTextInputChange}/>
-
-                <img src={profileImageSrc} alt="Profile image preview" width="100px"/>
-                <input type="file"
-                onChange={this.handleProfileImageUpload}
-                />
-                <br />
-                <button type="submit">Add Contact</button>
-            </form>
-        )
-    }
+    return (
+        <form>
+            <label>First Name:</label>
+            <input 
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+            />
+            <br />
+            <label>Last Name:</label>
+            <input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+            />
+            <br/>
+            <label>Phone Number:</label>
+            <input
+                type="tel"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+            <br/>
+            <label>Email:</label>
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <br/>
+            <label>Address</label>
+            <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+            />
+            <br/>
+            <img
+                src={profileImageSrc}
+                alt="Profile image preview"
+                width="100px"
+            />
+            <input
+                type="file"
+                onChange={handleImageUpload}
+            />
+            <br/>
+            <button type="submit">ADD CONTACT</button>
+        </form>
+    )
 }
+
+export default ContactForm;

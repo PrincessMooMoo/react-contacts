@@ -6,6 +6,6 @@ function App() {
     <div>
       <ContactForm />
     </div>
-  )
+  );
 }
 export default App;
