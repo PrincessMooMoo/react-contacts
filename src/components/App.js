@@ -1,11 +1,21 @@
+import { useState, useEffect } from 'react';
+import ContactContext from '../contexts/ContactContext';
 import './App.css';
+import ContactProvider from '../providers/ContactProvider';
 import ContactForm from './ContactForm';
+import ContactList from './ContactList';
 
-function App() {
+const App = () => {
+
   return (
     <div>
-      <ContactForm />
+      <ContactProvider>
+        <ContactList />
+        <ContactForm />
+      </ContactProvider>
     </div>
   );
+
 }
+
 export default App;
