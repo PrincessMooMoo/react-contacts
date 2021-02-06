@@ -6,6 +6,8 @@ import ContactItem from './ContactItem';
 const ContactList = () => {
 
     const { contacts } = useContacts();
+    const { user, login, logout} = useContext(AuthContext);
+    
     return (
         <div>
             {contacts.map(contact => (
